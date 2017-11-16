@@ -1,0 +1,30 @@
+[
+    "index.md",
+    "overview.md",
+    [
+        "experimental-results.md",
+        "experimental-results1.md",
+        "experimental-results2.md"
+    ],
+    "proposed.md",
+    [
+        "spectral-features.md",
+        "spectral-features2.md",
+        "spectral-features3.md",
+        "spectral-features4.md",
+        "spectral-features5.md"
+    ],
+    "lddmm-and-sf.md",
+    "challenges-of-sf.md",
+    [
+        "our-progress.md",
+        "our-progress1.md",
+        "our-progress2.md",
+        "our-progress3.md",
+        "our-progress4.md",
+        "our-progress5.md",
+        "our-progress6.md",
+        "our-progress7.md"
+    ],
+    "discussions-and-future-work.md"
+]
