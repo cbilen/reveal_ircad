@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>3D Medical Image Registration Using Spectral Graph Features</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/mysimple.css">
@@ -24,8 +24,149 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-markdown="slides/index.md"></section>
+
+
+                    
+                    
+                
+                    
+                        
+    <section data-markdown="slides/overview.md"></section>
+
+
+                    
+                    
+                
+                    
+                    
+                        <section>
+                            
+                                
+    <section data-markdown="slides/experimental-results.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/experimental-results1.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/experimental-results2.md"></section>
+
+
+                            
+                        </section>
+                    
+                
+                    
+                        
+    <section data-markdown="slides/proposed.md"></section>
+
+
+                    
+                    
+                
+                    
+                    
+                        <section>
+                            
+                                
+    <section data-markdown="slides/spectral-features.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/spectral-features2.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/spectral-features3.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/spectral-features4.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/spectral-features5.md"></section>
+
+
+                            
+                        </section>
+                    
+                
+                    
+                        
+    <section data-markdown="slides/lddmm-and-sf.md"></section>
+
+
+                    
+                    
+                
+                    
+                        
+    <section data-markdown="slides/challenges-of-sf.md"></section>
+
+
+                    
+                    
+                
+                    
+                    
+                        <section>
+                            
+                                
+    <section data-markdown="slides/our-progress.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/our-progress1.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/our-progress2.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/our-progress3.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/our-progress4.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/our-progress5.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/our-progress6.md"></section>
+
+
+                            
+                                
+    <section data-markdown="slides/our-progress7.md"></section>
+
+
+                            
+                        </section>
+                    
+                
+                    
+                        
+    <section data-markdown="slides/discussions-and-future-work.md"></section>
+	
 			</div>
 		</div>
 
@@ -38,10 +179,13 @@
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
 				dependencies: [
+				    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/math/math.js', async: true }
 				]
 			});
 		</script>
