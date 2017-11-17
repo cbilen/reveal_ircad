@@ -134,14 +134,6 @@ body {
   .reveal .slides section .fragment.current-visible.current-fragment {
     opacity: 1;
     visibility: inherit; }
-	
-
-.reveal .slides section .fragment.current-visible.visible:not(.current-fragment) {
-    display: none;
-    height:0px;
-    line-height: 0px;
-    font-size: 0px;
-}
 
 .reveal .slides section .fragment.highlight-red,
 .reveal .slides section .fragment.highlight-current-red,
