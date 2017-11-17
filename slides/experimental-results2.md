@@ -1,6 +1,6 @@
 ##  Experimental Results
 
-<p class="fragment current-visible" style="text-align: center">
+<div class="fragment current-visible" style="text-align: center">
 Patient 1 CT1-CT2 , Liver:**97.40** % , HVeins:**61.44** % 
 
 <div class="image12">
@@ -12,7 +12,7 @@ Patient 1 CT1-CT2 , Liver:**97.40** % , HVeins:**61.44** %
         <img class="right-img" src="resources/p1ct12_dipy_d2_comparison.gif" width=45% />
         <p style="text-align:center;">After registration</p>
     </div>
-</div></p>
+</div></div>
 
 <p class="fragment current-visible" style="text-align: center">
 Patient 1 CT1-CT3 , Liver:**97.75** % , HVeins:**47.74** %  
