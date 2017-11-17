@@ -5,11 +5,11 @@ Patient 1 CT1-CT2 , Liver:**97.40** % , HVeins:**61.44** %
 
 <div class="image12">
     <div style="float:left;margin-right:5px;">
-        <img src="resources/p1ct12_dipy_d2_comparison.gif" width=45%  />
+        <img class="plain" src="resources/p1ct12_dipy_d2_comparison.gif" width=40%  />
         <p style="text-align:center;">Before Registration</p>
     </div>
-    <div style="float:left;margin-right:5px;">
-        <img class="right-img" src="resources/p1ct12_dipy_d2_comparison.gif" width=45% />
+    <div style="float:right;margin-right:5px;">
+        <img class="plain" src="resources/p1ct12_dipy_d2_comparison.gif" width=40% />
         <p style="text-align:center;">After registration</p>
     </div>
 </div></div>
