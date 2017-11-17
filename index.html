@@ -24,148 +24,326 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-markdown="slides/index.md"></section>
+				<section data-markdown>
+					<textarea data-template>
+						
+## <div style="text-align: justify"> **3D Medical Image Registration** *using* **Spectral Graph Features**</div>
+<br>
+<div style="text-align: right">*by* **Çağdaş Bilen**
+<br>
+<br>
+*under supervision of*<br>
+**Vincent Noblet** *and* **Fabrice Heitz**</div>
 
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown>
+					<textarea data-template>
+##  Overview
 
++ Intra-patient Registration with **SyN**
+  - Results
++ Porposed for Inter-patient: **SyN** + **SF** 
+  - Summary of Spectral Features (**SF**)
+  - **SF** for abdomen: **SyN** + **SF**
+  - Challenges of **SF** for medical image registration
+  - Our Progress
+
+					</textarea>
+				</section>
+
+				<section>
+				
+					<section data-markdown>
+						<textarea data-template>
+##  **SyN** For Intra-Patient Registration
+
+Symmetric diffeomorphic registration (**SyN**) is one of the strongest deformable registration algorithms
+
+We have applied multi-level **SyN** for intra-patient registration for **3 different patients**, **5 total registration cases**
+
+|  Patient  | CT images | Manual Label |
+| --------- | --------- | ----- |
+| Patient 1 | 3 images | liver + hepatic veins |
+| Patient 2 | 2 images | liver + hepatic veins |
+| Patient 3 | 2 images | liver + hepatic veins |
+
+						</textarea>
+					</section>
+				
+					<section data-markdown>
+						<textarea data-template>
+##  Experimental Results
+
+DICE scores with **SyN** (6 levels)
+
+|  Images  | DICE Liver | DICE HVeins |
+| --------- | --------- | ----- |
+| Patient 1 CT1-CT2 | **97.40** % | **61.44** % |
+| Patient 1 CT1-CT3 | **97.75** % | **47.74** % |
+| Patient 1 CT2-CT3 | **97.64** % | **45.06** % |
+| Patient 2 CT1-CT2 | **96.45** % | **58.42** % |
+| Patient 3 CT1-CT2 | **95.16** % | **43.73** % |
+
+**Scores are limited due to some errors in manual labeling !**
+
+						</textarea>
+					</section>
+				
+					<section data-markdown>
+						<textarea data-template>
+##  Experimental Results
+
+<p class="fragment current-visible" style="text-align: center">
+Patient 1 CT1-CT2 , Liver:**97.40** % , HVeins:**61.44** % 
+
+<img class="plain"  src="resources/p1ct12_dipy_d2_comparison.gif" width=70%/></p>
+
+<p class="fragment current-visible" style="text-align: center">
+Patient 1 CT1-CT3 , Liver:**97.75** % , HVeins:**47.74** %  
+
+<img class="plain"  src="resources/p1ct13_dipy_d2_comparison.gif" width=70%/></p>
+
+<p class="fragment current-visible" style="text-align: center">
+Patient 1 CT2-CT3 , Liver:**97.64** % , HVeins:**45.06** % 
+
+<img class="plain"  src="resources/p1ct23_dipy_d2_comparison.gif" width=70%/></p>
+
+<p class="fragment current-visible" style="text-align: center">
+Patient 2 CT1-CT2 , Liver:**96.45** % , HVeins:**58.42** % 
+
+<img class="plain"  src="resources/p2ct12_dipy_d2_comparison.gif" width=70%/></p>
+
+<p class="fragment current-visible" style="text-align: center">
+Patient 3 CT1-CT2 , Liver:**95.16** % , HVeins:**43.73** % 
+
+<img class="plain"  src="resources/p2ct12_dipy_d2_comparison.gif" width=70%/></p>
+
+						</textarea>
+					</section>
+				
+				</section>
                     
-                    
+				<section data-markdown>
+					<textarea data-template>
+### Improving the **SyN** with **Spectral Features (SFs)**
+
+<p class="fragment fade-up">The **intra-patient** registration is **sufficiently good</p>**
+
+<p class="fragment fade-up">However **inter-patient** registration is still **poor**</p>
+
+<p class="fragment fade-up"><span style="color:green">We propose to use **Spectral Features (SFs)** to improve the performance</span></p>
+
+					</textarea>
+				</section>
                 
-                    
-                        
-    <section data-markdown="slides/overview.md"></section>
+				<section>
+				
+                    <section data-markdown>
+						<textarea data-template>        
+##  Spectral Features
+### A brief summary to Spectral Graph Theory    
+							
+						</textarea>
+					</section>
+				
+                    <section data-markdown>
+						<textarea data-template>        
+##  Spectral Features
 
+For a given graph, $\mathit{G}$, with **weight matrix**, $\mathbf{W}$, we can compute the graph laplacian as:
 
-                    
-                    
-                
-                    
-                    
-                        <section>
+`$\mathbf{L} = \mathbf{D} - \mathbf{W} \qquad \text{where }\mathbf{D} \triangleq \text{diag}(d_i),\quad d_i \triangleq \sum_j w_{ij}$`
+
+<div style="text-align: center"><img class="plain"  src="resources/graph_ex.png" width="450"/></div>  
+						</textarea>
+					</section>
+				
+                    <section data-markdown>
+						<textarea data-template>        
+##  Spectral Features
+
+* <p class="fragment fade-up">The **eigenvectors** of the graph laplacian, form an **orthonormal basis** for all functions over the graph</p>
+* <p class="fragment fade-up">These **eigenvectors** are **invariant** to geometric transformations over the graph</p>
+
+<p class="fragment fade-up" style="text-align: center">Mesh model example:
+<img class="plain"  src="resources/mesh_matching.png" width=75%/></p>  
+						</textarea>
+					</section>
+				
+                    <section data-markdown>
+						<textarea data-template>        
+##  Spectral Features
+
+<p class="fragment fade-up">We can build **a graph from pixels in images** with the weights between pixels decided by a function, `$w_{ij}(I_i, I_j, \mathbf{x_i}, \mathbf{x_j})$` </p>
+
+<p class="fragment fade-up" style="text-align: center">Example over images, `$\quad w_{ij} = \frac{1}{(\mathbf{x_i}-\mathbf{x_j})^2}e^{\frac{(I_i-I_j)^2}{\sigma^2}}$`
+
+<img class="plain"  src="resources/features_lena.png" width=75%/></p>   
+						</textarea>
+					</section>
+				
+                    <section data-markdown>
+						<textarea data-template>        
+##  Spectral Features
+#### How to utilise for registration
+
+<p class="fragment fade-up">These eigenvectors are **spectral features** that can be used for motion/deformation estimation</p>
+
+<p class="fragment fade-up">We can use $k$ **least spatially localized SFs** in addition to the original images for registration</p>   
+						</textarea>
+					</section>
                             
-                                
-    <section data-markdown="slides/experimental-results.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/experimental-results1.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/experimental-results2.md"></section>
-
-
-                            
-                        </section>
+                </section>
                     
-                
+                <section data-markdown>
+					<textarea data-template>        
+##  **SyN** and **SF**
+
+* <p class="fragment fade-up">**SyN** is already demonstrated to be performing well for deformable image registration</p>
+* <p class="fragment fade-up">We propose to combine the **SyN** algorithm with the **SFs** for more robust and improved image registration for Liver CT</p>
+* <p class="fragment fade-up">The use of **SF** is complementary to the advatages of **SyN**, hence almost no drawback</p>
+					</textarea>
+				</section>
                     
-                        
-    <section data-markdown="slides/proposed.md"></section>
+                <section data-markdown>
+					<textarea data-template>        
+##  Challenges of **SF**
+
+* <p class="fragment fade-up"> The **order of eigenvectors** for each image(volume) is not always the same for both (for close eigenvalues)</p>
+* <p class="fragment fade-up"> The eigenvectors have an inherent **sign ambiguity**</p>
+
+<p class="fragment fade-up"><span style="color:blue">Hence the comparison is **not always trivial**</span></p>
+
+<p class="fragment fade-up"><span style="color:red"> **Eigen-value decomposition is not feasible for large (3D) data, $O(kN^2)$**</span></p>
+					</textarea>
+				</section>
+				
+				<section>
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+
+<span style="color:blue">Comparison is **not always trivial**</span>
+
+<p class="fragment fade-up">This problem can be mostly solved by checking the **correlation coeffients** between all of the **SFs**</p>
+
+<p class="fragment fade-up">`$\Rightarrow$` Take the **most correlated** pairs, **invert** if reverse correlation</p> 
+						</textarea>
+					</section>    
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+
+<span style="color:red"> **Eigen-value decomposition is not feasible for large (3D) data, $O(kN^2)$**</span>
+
+<p class="fragment fade-up">We can reduce $N$ by downsampling the image</p>
+
+<p class="fragment fade-up">`$\Rightarrow$` **ALL THE DETAILS IN THE IMAGE ARE LOST!**</p>
+
+						</textarea>
+					</section>       
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+
+<span style="color:red"> **Eigen-value decomposition is not feasible for large (3D) data, $O(kN^2)$**</span>
+
+Instead we can use **supervoxels** !
+
+<img class="plain"  src="resources/lena_svx_comp.png" width=100%/></p>
+
+						</textarea>
+					</section>      
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+
+The range of intensities in CT images are very large
+
+<p class="fragment fade-up">`$\Rightarrow$` **The supervoxels do not well represent our region of interest (liver) !**</p>
+
+<p class="fragment fade-up" style="text-align: center"><img class="plain"  src="resources/ct_norm_svx.png" width=60%/></p>
+
+						</textarea>
+					</section>     
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+
+We can **_modify the histogram of the image_** to focus on the **_region of interest_**
+
+<img class="plain"  src="resources/ct_new_svx.png" width=100%/>
 
 
+						</textarea>
+					</section>     
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+#### Finding best weight function
+&nbsp; 
+&nbsp; 
+<p style="text-align: center">`$w_{ij} = e^{\left(\frac{(I_i-I_j)^2}{\sigma_I^2}+\frac{(\mathbf{x_i}-\mathbf{x_j})^2}{\sigma_x^2}\right)}$`</p>
+&nbsp; 
+&nbsp; 
+
+<p>`$\sigma_I$` : Intensity difference for connected tissue
+
+`$\sigma_x$` : Distance between connected tissue</p>
+&nbsp; 
+&nbsp; 
+
+**Both parameters can be empirically selected**
+
+						</textarea>
+					</section>     
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+#### Resulting **SFs**
+
+<p class="fragment current-visible" style="text-align: center">
+128000 supervoxels 
+
+<img class="plain"  src="resources/svx128000.png" width=100%/></p>
+
+<p class="fragment current-visible" style="text-align: center">
+16000 supervoxels 
+
+<img class="plain"  src="resources/svx16000.png" width=100%/></p>
+
+<p class="fragment current-visible" style="text-align: center">
+2000 supervoxels 
+
+<img class="plain"  src="resources/svx2000.png" width=100%/></p>
+
+						</textarea>
+					</section>    
+                    <section data-markdown>
+						<textarea data-template>        
+##  Our Progress
+
+- <span style="color:green"> **DONE** </span> Solve the **SF** reordering/sign problem 
+- <span style="color:green"> **DONE** </span> Use of supervoxels for the dimentionality reduction of eigen decomposition 
+- <span style="color:green"> **DONE** </span> Improve the supervoxel efficiency for medical image registration 
+- <span style="color:green"> **DONE** </span> Implement the proposed approach in **DiPy** library 
+- <span style="color:orange"> **IN PROGRESS** </span> Test for bugs, optimize performance and parameters 
+
+						</textarea>
+					</section>    
+					
+                </section>
                     
-                    
-                
-                    
-                    
-                        <section>
-                            
-                                
-    <section data-markdown="slides/spectral-features.md"></section>
+                <section data-markdown>
+					<textarea data-template>        
+##  Discussions and Future Work
 
-
-                            
-                                
-    <section data-markdown="slides/spectral-features2.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/spectral-features3.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/spectral-features4.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/spectral-features5.md"></section>
-
-
-                            
-                        </section>
-                    
-                
-                    
-                        
-    <section data-markdown="slides/lddmm-and-sf.md"></section>
-
-
-                    
-                    
-                
-                    
-                        
-    <section data-markdown="slides/challenges-of-sf.md"></section>
-
-
-                    
-                    
-                
-                    
-                    
-                        <section>
-                            
-                                
-    <section data-markdown="slides/our-progress.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/our-progress1.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/our-progress2.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/our-progress3.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/our-progress4.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/our-progress5.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/our-progress6.md"></section>
-
-
-                            
-                                
-    <section data-markdown="slides/our-progress7.md"></section>
-
-
-                            
-                        </section>
-                    
-                
-                    
-                        
-    <section data-markdown="slides/discussions-and-future-work.md"></section>
+This is a new Markdown slide
+					</textarea>
+				</section>
 	
 			</div>
 		</div>
